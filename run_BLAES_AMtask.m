@@ -1,4 +1,4 @@
- % BCI2000 Stimulus Presentation Demo Script
+% BCI2000 Stimulus Presentation Demo Script
 % 
 % StimulusPresentationScript_Demo creates a parameter fragment that can be
 % loaded into BCI2000 to create a stimulus presentation experiment.
@@ -76,9 +76,9 @@ settings.SampleBlockSize       = '200';     % number of samples in a block - wha
 settings.PreRunDuration        = '2s';
 settings.PostRunDuration       = '0.5s';
 settings.ElaborationDuration   = '17s';
-settings.TaskDuration          = '3s';
+settings.RatingDuration        = '5s';
 settings.MaxSearchDuration     = '20s';
-settings.DistractorDuration    =  '7s';
+settings.DistractorDuration    = '5s';
 settings.InstructionDuration   = '64000s';
 settings.SyncPulseDuration     = '0s';
 settings.BaselineMinDuration   = '0.5s';
@@ -89,10 +89,10 @@ settings.WindowTop             = '0';
 settings.WindowLeft            = '0';
 settings.WindowWidth           = '640';
 settings.WindowHeight          = '480';
-settings.BackgroundColor       = '0xFFFFFF'; %black
-settings.CaptionColor          = '0x000000';
+settings.BackgroundColor       = '0x000000'; %black
+settings.CaptionColor          = '0xFFFFFF'; %white
 settings.CaptionSwitch         = '1';
-settings.WindowBackgroundColor = '0xFFFFFF';
+settings.WindowBackgroundColor = '0x000000';
 settings.ITI                   = '3s';
 settings.beforeISI             = '1s';
 settings.betweenISI            = '0.5s';

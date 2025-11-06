@@ -130,10 +130,10 @@ for idx = 1001:1000+num_images
     param.Stimuli.Value{1,idx}      = '';
     param.Stimuli.Value{2,idx}      = fullfile(settings.imagepath, 'Reliving_rating', ALL_IMAGES(img_idx).name);
     param.Stimuli.Value{3,idx}      = '';
-    param.Stimuli.Value{4,idx}      = settings.TaskDuration;
+    param.Stimuli.Value{4,idx}      = settings.RatingDuration; %5s
     param.Stimuli.Value{5,idx}      = '0';    
     param.Stimuli.Value{6,idx}      = 'Reliving_rating'; 
-    param.Stimuli.Value{7,idx}      = ''; %none, image on the screen for 3s 
+    param.Stimuli.Value{7,idx}      = ''; %none, image on the screen for 5s 
     
     idx_iter = idx_iter + 1;
 
@@ -150,17 +150,17 @@ for idx = 1501:1500+num_images
     param.Stimuli.Value{1,idx}      = '';
     param.Stimuli.Value{2,idx}      = fullfile(settings.imagepath,'Valence_rating', ALL_IMAGES(img_idx).name);
     param.Stimuli.Value{3,idx}      = '';
-    param.Stimuli.Value{4,idx}      = settings.TaskDuration;
+    param.Stimuli.Value{4,idx}      = settings.RatingDuration; %5s
     param.Stimuli.Value{5,idx}      = '0';    
     param.Stimuli.Value{6,idx}      = 'Valence_rating'; 
-    param.Stimuli.Value{7,idx}      = ''; %none, image on the screen for 3s 
+    param.Stimuli.Value{7,idx}      = ''; %none, image on the screen for 5s 
     
     idx_iter = idx_iter + 1;
 end 
 %answer keys KeyDown == 49', 'KeyDown == 50', 'KeyDown == 51', 'KeyDown ==
 %52'}; ---> answers 1-4
 
-%% Instructions 2501-2510
+%% Instructions 2501-2510 - no instructions on screen for this task
 InstructionsFilenames = {'task_instructions.png','end_instructions.png'};
 
 start_idx = 2501;
@@ -179,7 +179,7 @@ for i = 1:length(InstructionsFilenames)
     idx_iter = idx_iter + 1;
 end 
 
-%% Shaded boxes 2001-2100
+%% Shaded boxes main task 2001-2100
 num_boxes = 14;
 
 idx_iter = 1;
@@ -189,13 +189,33 @@ for idx = 2001:2000+num_boxes(idx_iter)
     param.Stimuli.Value{1,idx}      = '';
     param.Stimuli.Value{2,idx}      = fullfile(settings.boxespath, ['box' num2str(idx_iter) '.png']);
     param.Stimuli.Value{3,idx}      = '';
-    param.Stimuli.Value{4,idx}      = '3s';
+    param.Stimuli.Value{4,idx}      = settings.DistractorDuration; %5s
     param.Stimuli.Value{5,idx}      = '0';    
     param.Stimuli.Value{6,idx}      = 'shaded_boxes'; 
-    param.Stimuli.Value{7,idx}      = 'KeyDown == 37' ; % left key
+    param.Stimuli.Value{7,idx}      = 'KeyDown == 37 || KeyDown == 39'; % left or right arrow key
     
     idx_iter = idx_iter + 1;
 end
+
+
+%% Shaded boxes practice task 6001-6100
+num_boxes = 14;
+
+idx_iter = 1;
+
+for idx = 6001:6000+num_boxes(idx_iter)
+    param.Stimuli.ColumnLabels{idx} = sprintf('%d',idx);
+    param.Stimuli.Value{1,idx}      = '';
+    param.Stimuli.Value{2,idx}      = fullfile(settings.boxespath, ['box' num2str(idx_iter) '.png']);
+    param.Stimuli.Value{3,idx}      = '';
+    param.Stimuli.Value{4,idx}      = settings.DistractorDuration; %5s
+    param.Stimuli.Value{5,idx}      = '0';    
+    param.Stimuli.Value{6,idx}      = 'shaded_boxes'; 
+    param.Stimuli.Value{7,idx}      = 'KeyDown == 37 || KeyDown == 39' ; %  left and right arrow key
+    
+    idx_iter = idx_iter + 1;
+end
+
 
 %% PRACTICE: Set up
 num_practice = size(practice_set, 1);  % Number of practice images
@@ -223,7 +243,7 @@ for i = 1:num_practice
     
     param.Stimuli.ColumnLabels{idx} = sprintf('%d', idx);
     param.Stimuli.Value{1,idx}      = '';
-    param.Stimuli.Value{2,idx}      = fullfile(settings.practicepath, 'Wold_list', practice_set(img_idx).name);
+    param.Stimuli.Value{2,idx}      = fullfile(settings.practicepath, 'Word_list', practice_set(img_idx).name);
     param.Stimuli.Value{3,idx}      = '';
     param.Stimuli.Value{4,idx}      = settings.MaxSearchDuration;
     param.Stimuli.Value{5,idx}      = '0';
@@ -240,7 +260,7 @@ for i = 1:num_practice
     param.Stimuli.Value{1,idx}      = '';
     param.Stimuli.Value{2,idx}      = fullfile(settings.practicepath, 'Reliving_rating', practice_set(img_idx).name);
     param.Stimuli.Value{3,idx}      = '';
-    param.Stimuli.Value{4,idx}      = settings.TaskDuration;
+    param.Stimuli.Value{4,idx}      = settings.RatingDuration;
     param.Stimuli.Value{5,idx}      = '0';
     param.Stimuli.Value{6,idx}      = 'practice_Reliving_rating';
     param.Stimuli.Value{7,idx}      = '';
@@ -255,7 +275,7 @@ for i = 1:num_practice
     param.Stimuli.Value{1,idx}      = '';
     param.Stimuli.Value{2,idx}      = fullfile(settings.practicepath, 'Valence_rating', practice_set(img_idx).name);
     param.Stimuli.Value{3,idx}      = '';
-    param.Stimuli.Value{4,idx}      = settings.TaskDuration;
+    param.Stimuli.Value{4,idx}      = settings.RatingDuration;
     param.Stimuli.Value{5,idx}      = '0';
     param.Stimuli.Value{6,idx}      = 'practice_Valence_rating';
     param.Stimuli.Value{7,idx}      = ''; 
@@ -284,7 +304,7 @@ num_practice_trials = 6;
 
 for i = 1:num_practice_trials
     % shaded boxes
-    box_seq = [2001, 2002, 2003, 2004, 2005, 2006,2007,2008,2009,2010,2011,2012,2013,2014];
+    box_seq = [6001, 6002, 6003, 6004, 6005, 6006, 6007, 6008, 6009, 6010, 6011, 6012, 6013, 6014];
     box_seq = box_seq(randperm(length(box_seq)));
 
     for j=1:length(box_seq)
@@ -305,6 +325,7 @@ for i = 1:num_practice_trials
         valence_idx, ...
         5203];  % ITI between trials
 end
+prac_seq = prac_seq'; %transpose martix!
 
 
 %% Build Main Task Sequence
@@ -336,7 +357,7 @@ for i = 1:num_trials
         5203];  % ITI between trials
 end
 
-seq = task_seq';
+seq = task_seq';  %transpose martix!
 
 % Assign to parameter
 param.Sequence.Section      = 'Application';
